@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDao">
+<select id="findByPage" resultType="com.baizhi.entity.User">
+         select * from t_user limit #{start},#{rows}
+
+    </select>
+<select id="findTotals" resultType="long">
+       select count(id) from t_user
+    </select>
+    <update id="update"  parameterType="com.baizhi.entity.User">
+        update t_user set phoneNum=#{phoneNum},username=#{username},password=#{password},city=#{city},name=#{name},sex=#{sex},sign=#{sign},headImg=#{headImg},addtime=#{addtime},marking1=#{marking1},marking2=#{marking2},start=#{start} where id=#{id}
+   </update>
+    <select id="findOne" resultType="com.baizhi.entity.User">
+        select * from t_user where id=#{id}
+    </select>
+    <insert id="Right" parameterType="com.baizhi.entity.User">
+      insert into t_user values (#{id},#{phoneNum},#{username},#{password},#{city},#{name},#{sex},#{sign})
+    </insert>
+    <select id="Login" resultType="com.baizhi.entity.User">
+        select * from t_user where username=#{username} and password=#{password}
+    </select>
+
+
+
+
+
+</mapper>

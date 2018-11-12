@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AdminDao">
+
+
+    <insert id="Right" parameterType="com.baizhi.entity.Admin">
+      insert into t_admin values (#{id},#{name},#{username},#{password},#{qx})
+    </insert>
+    <select id="Login" resultType="com.baizhi.entity.Admin">
+        select * from t_admin where username=#{username} and password=#{password}
+    </select>
+    <update id="update" parameterType="com.baizhi.entity.Admin">
+        update t_admin set name=#{name},username=#{username},password=#{password} where id=#{id}
+    </update>
+    <select id="findOne" resultType="com.baizhi.entity.Admin">
+         select * from t_admin where id=#{id}
+    </select>
+
+
+
+</mapper>

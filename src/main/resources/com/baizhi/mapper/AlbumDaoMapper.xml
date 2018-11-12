@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AlbumDao">
+    <resultMap id="albumsMap" type="com.baizhi.entity.Album">
+        <id property="id" column="pid"></id>
+        <result property="name" column="pname"></result>
+        <result property="publishDate" column="ppublishDate"></result>
+        <result property="coverImg" column="pcoverImg"></result>
+        <result property="star" column="pstar"></result>
+        <result property="author" column="pauthor"></result>
+        <result property="broadCasts" column="pbroadCasts"></result>
+        <result property="brief" column="pbrief"></result>
+        <collection property="children" ofType="com.baizhi.entity.Chapter" >
+            <id property="id" column="cid"></id>
+            <result property="name" column="cname"></result>
+            <result property="url" column="curl"></result>
+            <result property="hour" column="chour"></result>
+            <result property="size" column="csize"></result>
+            <result property="uploadTime" column="cuploadTime"></result>
+            <result property="a_id" column="ca_id"></result>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="albumsMap">
+       select 	p.id pid,
+                p.name pname,
+                p.publishDate ppublishDate,
+                p.coverImg pcoverImg,
+                p.star pstar,
+                p.author pauthor,
+                p.broadCasts pbroadCasts,
+                p.brief pbrief,
+                c.id cid,
+                c.name cname,
+                c.url curl,
+                c.hour chour,
+                c.size csize,
+                c.uploadTime cuploadTime,
+                c.a_id ca_id
+       from t_album p left join t_chapter c on p.id=c.a_id
+    </select>
+    <insert id="save" parameterType="com.baizhi.entity.Album">
+           insert into t_album values (#{id},#{name},#{publishDate},#{coverImg},#{star},#{author},#{broadCasts},#{brief})
+    </insert>
+    <select id="findOne" resultType="com.baizhi.entity.Album">
+        select id,name,publishDate,coverImg,star,author,broadCasts,brief from t_album where id=#{id}
+    </select>
+
+
+
+</mapper>
